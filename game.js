@@ -53,19 +53,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set player avatars
   function setPlayerAvatars() {
-    // Player 1 SVG
+    // Godzilla SVG
     const player1SVG = `
       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
         <!-- Background -->
-        <rect width="200" height="200" fill="#4CAF50" rx="10" ry="10"/>
+        <rect width="200" height="200" fill="#0F5738" rx="10" ry="10"/>
         
         <!-- Body -->
-        <rect x="75" y="110" width="50" height="70" fill="#FFF" rx="5" ry="5"/>
+        <path d="M75 110 L 75 180 L 125 180 L 125 110 Z" fill="#1A7F54"/>
         
         <!-- Head -->
-        <circle cx="100" cy="70" r="40" fill="#FFE0B2"/>
+        <path d="M70 70 L 60 40 L 100 30 L 140 40 L 130 70 Z" fill="#1A7F54"/>
+        <circle cx="100" cy="70" r="35" fill="#1A7F54"/>
         
-        <!-- Hair -->
+        <!-- Spikes -->
+        <path d="M85 30 L 90 15 L 95 30" fill="#0A3B25" stroke="#0A3B25" stroke-width="2"/>
+        <path d="M100 25 L 105 5 L 110 25" fill="#0A3B25" stroke="#0A3B25" stroke-width="2"/>
+        <path d="M115 30 L 120 15 L 125 30" fill="#0A3B25" stroke="#0A3B25" stroke-width="2"/>
+        
+        <!-- Tail -->
+        <path d="M100 180 L 110 190 L 120 195 L 130 190" fill="#1A7F54" stroke="#0A3B25" stroke-width="2"/>
+        
+        <!-- Eyes - Normal -->
+        <g class="eyes-normal">
+          <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
+          <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
+          <circle cx="85" cy="65" r="3" fill="#FF0000"/>
+          <circle cx="115" cy="65" r="3" fill="#FF0000"/>
+        </g>
+        
+        <!-- Eyes - Pain (initially hidden) -->
+        <g class="eyes-pain" style="display: none;">
+          <path d="M80 65 L 90 65" stroke="#FF0000" stroke-width="2"/>
+          <path d="M110 65 L 120 65" stroke="#FF0000" stroke-width="2"/>
+        </g>
+        
+        <!-- Eyebrows - Normal -->
+        <g class="eyebrows-normal">
+          <path d="M75 55 Q 85 50 95 55" stroke="#0A3B25" stroke-width="3" fill="none"/>
+          <path d="M105 55 Q 115 50 125 55" stroke="#0A3B25" stroke-width="3" fill="none"/>
+        </g>
+        
+        <!-- Eyebrows - Pain (initially hidden) -->
+        <g class="eyebrows-pain" style="display: none;">
+          <path d="M75 50 Q 85 60 95 50" stroke="#0A3B25" stroke-width="3" fill="none"/>
+          <path d="M105 50 Q 115 60 125 50" stroke="#0A3B25" stroke-width="3" fill="none"/>
+        </g>
+        
+        <!-- Mouth - Normal -->
+        <g class="mouth-normal">
+          <path d="M85 90 Q 100 95 115 90" stroke="#0A3B25" stroke-width="2" fill="none"/>
+          <!-- Teeth -->
+          <path d="M90 90 L 90 95" stroke="#FFF" stroke-width="2"/>
+          <path d="M100 92 L 100 97" stroke="#FFF" stroke-width="2"/>
+          <path d="M110 90 L 110 95" stroke="#FFF" stroke-width="2"/>
+        </g>
+        
+        <!-- Mouth - Pain (initially hidden) -->
+        <g class="mouth-pain" style="display: none;">
+          <path d="M85 95 Q 100 105 115 95" stroke="#0A3B25" stroke-width="3" fill="none"/>
+          <!-- Teeth -->
+          <path d="M90 95 L 90 100" stroke="#FFF" stroke-width="2"/>
+          <path d="M100 100 L 100 105" stroke="#FFF" stroke-width="2"/>
+          <path d="M110 95 L 110 100" stroke="#FFF" stroke-width="2"/>
+        </g>
+        
+        <!-- Arms -->
+        <path d="M75 120 L 55 140 L 50 160" fill="#1A7F54" stroke="#0A3B25" stroke-width="2"/>
+        <path d="M125 120 L 145 140 L 150 160" fill="#1A7F54" stroke="#0A3B25" stroke-width="2"/>
+        
+        <!-- Claws -->
+        <path d="M50 160 L 45 165 L 50 162" stroke="#FFF" stroke-width="2" fill="none"/>
+        <path d="M50 160 L 50 168 L 53 162" stroke="#FFF" stroke-width="2" fill="none"/>
+        <path d="M50 160 L 55 165 L 56 160" stroke="#FFF" stroke-width="2" fill="none"/>
+        
+        <path d="M150 160 L 155 165 L 150 162" stroke="#FFF" stroke-width="2" fill="none"/>
+        <path d="M150 160 L 150 168 L 147 162" stroke="#FFF" stroke-width="2" fill="none"/>
+        <path d="M150 160 L 145 165 L 144 160" stroke="#FFF" stroke-width="2" fill="none"/>
+      </svg>
+    `;
+
+    // King Kong SVG
+    const player2SVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
+        <!-- Background -->
+        <rect width="200" height="200" fill="#5D4037" rx="10" ry="10"/>
+        
+        <!-- Body -->
+        <path d="M75 110 L 75 180 L 125 180 L 125 110 Z" fill="#8D6E63"/>
+        
+        <!-- Head -->
+        <circle cx="100" cy="70" r="40" fill="#8D6E63"/>
+        
+        <!-- Fur -->
         <path d="M60 70 Q 70 30 100 40 Q 130 30 140 70" fill="#5D4037"/>
         <path d="M60 70 Q 70 40 100 50 Q 130 40 140 70" fill="#5D4037"/>
         
@@ -73,122 +153,53 @@ document.addEventListener("DOMContentLoaded", () => {
         <g class="eyes-normal">
           <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
           <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
-          <circle cx="85" cy="65" r="3" fill="#263238"/>
-          <circle cx="115" cy="65" r="3" fill="#263238"/>
+          <circle cx="85" cy="65" r="3" fill="#3E2723"/>
+          <circle cx="115" cy="65" r="3" fill="#3E2723"/>
         </g>
         
         <!-- Eyes - Pain (initially hidden) -->
         <g class="eyes-pain" style="display: none;">
-          <path d="M80 65 L 90 65" stroke="#263238" stroke-width="2"/>
-          <path d="M110 65 L 120 65" stroke="#263238" stroke-width="2"/>
+          <path d="M80 65 L 90 65" stroke="#3E2723" stroke-width="2"/>
+          <path d="M110 65 L 120 65" stroke="#3E2723" stroke-width="2"/>
         </g>
         
         <!-- Eyebrows - Normal -->
         <g class="eyebrows-normal">
-          <path d="M80 55 Q 85 52 90 55" stroke="#5D4037" stroke-width="2" fill="none"/>
-          <path d="M110 55 Q 115 52 120 55" stroke="#5D4037" stroke-width="2" fill="none"/>
+          <path d="M75 55 Q 85 48 95 55" stroke="#3E2723" stroke-width="3" fill="none"/>
+          <path d="M105 55 Q 115 48 125 55" stroke="#3E2723" stroke-width="3" fill="none"/>
         </g>
         
         <!-- Eyebrows - Pain (initially hidden) -->
         <g class="eyebrows-pain" style="display: none;">
-          <path d="M80 50 Q 85 55 90 50" stroke="#5D4037" stroke-width="2" fill="none"/>
-          <path d="M110 50 Q 115 55 120 50" stroke="#5D4037" stroke-width="2" fill="none"/>
+          <path d="M75 50 Q 85 60 95 50" stroke="#3E2723" stroke-width="3" fill="none"/>
+          <path d="M105 50 Q 115 60 125 50" stroke="#3E2723" stroke-width="3" fill="none"/>
         </g>
         
         <!-- Mouth - Normal -->
         <g class="mouth-normal">
-          <path d="M90 90 Q 100 100 110 90" stroke="#263238" stroke-width="2" fill="none"/>
+          <path d="M85 85 Q 100 90 115 85" stroke="#3E2723" stroke-width="2" fill="none"/>
+          <!-- Teeth -->
+          <path d="M95 85 L 95 88" stroke="#FFF" stroke-width="2"/>
+          <path d="M100 86 L 100 89" stroke="#FFF" stroke-width="2"/>
+          <path d="M105 85 L 105 88" stroke="#FFF" stroke-width="2"/>
         </g>
         
         <!-- Mouth - Pain (initially hidden) -->
         <g class="mouth-pain" style="display: none;">
-          <path d="M90 95 Q 100 85 110 95" stroke="#263238" stroke-width="2" fill="none"/>
-          <path d="M95 90 L 105 90" stroke="#263238" stroke-width="1" fill="none"/>
+          <path d="M85 95 Q 100 105 115 95" stroke="#3E2723" stroke-width="3" fill="none"/>
+          <path d="M95 100 L 105 100" stroke="#3E2723" stroke-width="2" fill="none"/>
         </g>
         
         <!-- Nose -->
-        <path d="M100 70 L 97 80 L 103 80 Z" fill="#FFD0A1"/>
+        <path d="M95 75 L 100 80 L 105 75 Z" fill="#3E2723"/>
         
         <!-- Arms -->
-        <rect x="55" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
-        <rect x="125" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
+        <path d="M75 120 L 50 150 L 45 180" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
+        <path d="M125 120 L 150 150 L 155 180" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
         
         <!-- Hands -->
-        <circle cx="65" cy="165" r="10" fill="#FFE0B2"/>
-        <circle cx="135" cy="165" r="10" fill="#FFE0B2"/>
-        
-        <!-- Collar -->
-        <path d="M75 110 L 85 120 L 115 120 L 125 110" fill="#E0E0E0"/>
-      </svg>
-    `;
-
-    // Player 2 SVG
-    const player2SVG = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
-        <!-- Background -->
-        <rect width="200" height="200" fill="#F44336" rx="10" ry="10"/>
-        
-        <!-- Body -->
-        <rect x="75" y="110" width="50" height="70" fill="#FFF" rx="5" ry="5"/>
-        
-        <!-- Head -->
-        <circle cx="100" cy="70" r="40" fill="#FFE0B2"/>
-        
-        <!-- Hair -->
-        <path d="M60 50 L 60 70 L 140 70 L 140 50 Q 100 20 60 50" fill="#263238"/>
-        <path d="M60 50 L 60 70 L 140 70 L 140 50 Q 100 30 60 50" fill="#263238"/>
-        
-        <!-- Eyes - Normal -->
-        <g class="eyes-normal">
-          <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
-          <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
-          <circle cx="85" cy="65" r="3" fill="#263238"/>
-          <circle cx="115" cy="65" r="3" fill="#263238"/>
-        </g>
-        
-        <!-- Eyes - Pain (initially hidden) -->
-        <g class="eyes-pain" style="display: none;">
-          <path d="M80 65 L 90 65" stroke="#263238" stroke-width="2"/>
-          <path d="M110 65 L 120 65" stroke="#263238" stroke-width="2"/>
-        </g>
-        
-        <!-- Eyebrows - Normal -->
-        <g class="eyebrows-normal">
-          <path d="M80 55 Q 85 50 90 55" stroke="#263238" stroke-width="2" fill="none"/>
-          <path d="M110 55 Q 115 50 120 55" stroke="#263238" stroke-width="2" fill="none"/>
-        </g>
-        
-        <!-- Eyebrows - Pain (initially hidden) -->
-        <g class="eyebrows-pain" style="display: none;">
-          <path d="M80 50 Q 85 55 90 50" stroke="#263238" stroke-width="2" fill="none"/>
-          <path d="M110 50 Q 115 55 120 50" stroke="#263238" stroke-width="2" fill="none"/>
-        </g>
-        
-        <!-- Mouth - Normal -->
-        <g class="mouth-normal">
-          <path d="M90 85 Q 100 80 110 85" stroke="#263238" stroke-width="2" fill="none"/>
-          <path d="M90 85 Q 100 90 110 85" stroke="#263238" stroke-width="2" fill="none"/>
-        </g>
-        
-        <!-- Mouth - Pain (initially hidden) -->
-        <g class="mouth-pain" style="display: none;">
-          <path d="M90 95 Q 100 85 110 95" stroke="#263238" stroke-width="2" fill="none"/>
-          <path d="M95 90 L 105 90" stroke="#263238" stroke-width="1" fill="none"/>
-        </g>
-        
-        <!-- Nose -->
-        <path d="M100 70 L 97 80 L 103 80 Z" fill="#FFD0A1"/>
-        
-        <!-- Arms -->
-        <rect x="55" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
-        <rect x="125" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
-        
-        <!-- Hands -->
-        <circle cx="65" cy="165" r="10" fill="#FFE0B2"/>
-        <circle cx="135" cy="165" r="10" fill="#FFE0B2"/>
-        
-        <!-- Collar -->
-        <path d="M75 110 L 85 120 L 115 120 L 125 110" fill="#E0E0E0"/>
+        <path d="M45 180 C 40 185 40 190 45 190 C 50 190 55 185 55 180 Z" fill="#8D6E63" stroke="#5D4037" stroke-width="1"/>
+        <path d="M155 180 C 160 185 160 190 155 190 C 150 190 145 185 145 180 Z" fill="#8D6E63" stroke="#5D4037" stroke-width="1"/>
       </svg>
     `;
 
@@ -398,7 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Log attack in battle log
   function logAttack(playerNum, word, damage) {
-    const playerName = `Player ${playerNum}`;
+    const playerName = playerNum === 1 ? "Godzilla" : "King Kong";
     const message = `${playerName} attacks with "${word}" dealing ${damage} damage!`;
     addToBattleLog(message, `player${playerNum}-attack`);
   }
@@ -541,7 +552,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Update player turn indicator
   function updatePlayerTurn() {
-    playerTurn.textContent = `Player ${currentPlayer}'s turn`;
+    const playerName = currentPlayer === 1 ? "Godzilla" : "King Kong";
+    playerTurn.textContent = `${playerName}'s turn`;
 
     // Highlight active player
     if (currentPlayer === 1) {
@@ -556,9 +568,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // End game
   function endGame() {
     gameOver = true;
-    const winner = player1HealthValue <= 0 ? 2 : 1;
-    addToBattleLog(`Game Over! Player ${winner} wins!`, "game-over");
-    playerTurn.textContent = `Player ${winner} wins!`;
+    const winner = player1HealthValue <= 0 ? "King Kong" : "Godzilla";
+    addToBattleLog(`Game Over! ${winner} wins!`, "game-over");
+    playerTurn.textContent = `${winner} wins!`;
     attackButton.disabled = true;
     attackWord.disabled = true;
   }
@@ -573,7 +585,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Clear battle log
     battleLog.innerHTML =
-      "<p>The battle begins! Type a word and hit attack!</p>";
+      "<p>The epic battle between Godzilla and King Kong begins! Type a word and hit attack!</p>";
 
     // Enable controls
     attackButton.disabled = false;
