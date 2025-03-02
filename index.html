@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Fight!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>Word Fight!</h1>
+
+      <div class="battle-arena">
+        <div class="player player-1">
+          <div class="player-info">
+            <h2>Player 1</h2>
+            <div class="health-bar">
+              <div class="health-fill" id="player1-health"></div>
+            </div>
+            <div class="health-text">
+              Health: <span id="player1-health-text">100</span>
+            </div>
+          </div>
+          <div class="player-avatar">
+            <img src="player1.png" alt="Player 1" id="player1-avatar" />
+          </div>
+        </div>
+
+        <div class="battle-log" id="battle-log">
+          <p>The battle begins! Type a word and hit attack!</p>
+        </div>
+
+        <div class="player player-2">
+          <div class="player-info">
+            <h2>Player 2</h2>
+            <div class="health-bar">
+              <div class="health-fill" id="player2-health"></div>
+            </div>
+            <div class="health-text">
+              Health: <span id="player2-health-text">100</span>
+            </div>
+          </div>
+          <div class="player-avatar">
+            <img src="player2.png" alt="Player 2" id="player2-avatar" />
+          </div>
+        </div>
+      </div>
+
+      <div class="game-controls">
+        <div class="player-turn" id="player-turn">Player 1's turn</div>
+
+        <div class="attack-form">
+          <input
+            type="text"
+            id="attack-word"
+            placeholder="Enter a word to attack..."
+            autocomplete="off"
+          />
+          <button id="attack-button">Attack!</button>
+        </div>
+
+        <button id="reset-game" class="reset-button">Reset Game</button>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
