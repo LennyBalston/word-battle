@@ -4,8 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const player2Health = document.getElementById("player2-health");
   const player1HealthText = document.getElementById("player1-health-text");
   const player2HealthText = document.getElementById("player2-health-text");
-  const player1Avatar = document.getElementById("player1-avatar");
-  const player2Avatar = document.getElementById("player2-avatar");
+  const player1AvatarContainer = document.getElementById(
+    "player1-avatar-container"
+  );
+  const player2AvatarContainer = document.getElementById(
+    "player2-avatar-container"
+  );
   const playerTurn = document.getElementById("player-turn");
   const battleLog = document.getElementById("battle-log");
   const attackWord = document.getElementById("attack-word");
@@ -35,22 +39,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize the game
   function initGame() {
-    // Set default avatar images or use placeholders
-    player1Avatar.src = "player1.png";
-    player1Avatar.onerror = () => {
-      player1Avatar.src =
-        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234CAF50"/><text x="50" y="60" font-size="30" text-anchor="middle" fill="white">P1</text></svg>';
-    };
-
-    player2Avatar.src = "player2.png";
-    player2Avatar.onerror = () => {
-      player2Avatar.src =
-        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f44336"/><text x="50" y="60" font-size="30" text-anchor="middle" fill="white">P2</text></svg>';
-    };
+    // Set player avatars using inline SVG
+    setPlayerAvatars();
 
     // Update UI
     updateHealthBars();
     updatePlayerTurn();
+  }
+
+  // Set player avatars
+  function setPlayerAvatars() {
+    // Player 1 SVG
+    const player1SVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200">
+        <!-- Background -->
+        <rect width="200" height="200" fill="#4CAF50" rx="10" ry="10"/>
+        
+        <!-- Body -->
+        <rect x="75" y="110" width="50" height="70" fill="#FFF" rx="5" ry="5"/>
+        
+        <!-- Head -->
+        <circle cx="100" cy="70" r="40" fill="#FFE0B2"/>
+        
+        <!-- Hair -->
+        <path d="M60 70 Q 70 30 100 40 Q 130 30 140 70" fill="#5D4037"/>
+        <path d="M60 70 Q 70 40 100 50 Q 130 40 140 70" fill="#5D4037"/>
+        
+        <!-- Eyes -->
+        <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
+        <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
+        <circle cx="85" cy="65" r="3" fill="#263238"/>
+        <circle cx="115" cy="65" r="3" fill="#263238"/>
+        
+        <!-- Eyebrows -->
+        <path d="M80 55 Q 85 52 90 55" stroke="#5D4037" stroke-width="2" fill="none"/>
+        <path d="M110 55 Q 115 52 120 55" stroke="#5D4037" stroke-width="2" fill="none"/>
+        
+        <!-- Mouth -->
+        <path d="M90 90 Q 100 100 110 90" stroke="#263238" stroke-width="2" fill="none"/>
+        
+        <!-- Nose -->
+        <path d="M100 70 L 97 80 L 103 80 Z" fill="#FFD0A1"/>
+        
+        <!-- Arms -->
+        <rect x="55" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
+        <rect x="125" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
+        
+        <!-- Hands -->
+        <circle cx="65" cy="165" r="10" fill="#FFE0B2"/>
+        <circle cx="135" cy="165" r="10" fill="#FFE0B2"/>
+        
+        <!-- Collar -->
+        <path d="M75 110 L 85 120 L 115 120 L 125 110" fill="#E0E0E0"/>
+      </svg>
+    `;
+
+    // Player 2 SVG
+    const player2SVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200">
+        <!-- Background -->
+        <rect width="200" height="200" fill="#F44336" rx="10" ry="10"/>
+        
+        <!-- Body -->
+        <rect x="75" y="110" width="50" height="70" fill="#FFF" rx="5" ry="5"/>
+        
+        <!-- Head -->
+        <circle cx="100" cy="70" r="40" fill="#FFE0B2"/>
+        
+        <!-- Hair -->
+        <path d="M60 50 L 60 70 L 140 70 L 140 50 Q 100 20 60 50" fill="#263238"/>
+        <path d="M60 50 L 60 70 L 140 70 L 140 50 Q 100 30 60 50" fill="#263238"/>
+        
+        <!-- Eyes -->
+        <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
+        <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
+        <circle cx="85" cy="65" r="3" fill="#263238"/>
+        <circle cx="115" cy="65" r="3" fill="#263238"/>
+        
+        <!-- Eyebrows -->
+        <path d="M80 55 Q 85 50 90 55" stroke="#263238" stroke-width="2" fill="none"/>
+        <path d="M110 55 Q 115 50 120 55" stroke="#263238" stroke-width="2" fill="none"/>
+        
+        <!-- Mouth -->
+        <path d="M90 85 Q 100 80 110 85" stroke="#263238" stroke-width="2" fill="none"/>
+        <path d="M90 85 Q 100 90 110 85" stroke="#263238" stroke-width="2" fill="none"/>
+        
+        <!-- Nose -->
+        <path d="M100 70 L 97 80 L 103 80 Z" fill="#FFD0A1"/>
+        
+        <!-- Arms -->
+        <rect x="55" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
+        <rect x="125" y="115" width="20" height="50" fill="#FFE0B2" rx="10" ry="10"/>
+        
+        <!-- Hands -->
+        <circle cx="65" cy="165" r="10" fill="#FFE0B2"/>
+        <circle cx="135" cy="165" r="10" fill="#FFE0B2"/>
+        
+        <!-- Collar -->
+        <path d="M75 110 L 85 120 L 115 120 L 125 110" fill="#E0E0E0"/>
+      </svg>
+    `;
+
+    // Insert SVG content into containers
+    player1AvatarContainer.innerHTML = player1SVG;
+    player2AvatarContainer.innerHTML = player2SVG;
   }
 
   // Handle attack
