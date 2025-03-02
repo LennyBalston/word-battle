@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#607D8B" rx="10" ry="10"/>
+  
+  <!-- Body -->
+  <path d="M75 110 L 75 180 L 125 180 L 125 110 Z" fill="#90A4AE"/>
+  
+  <!-- Mechanical Details -->
+  <path d="M85 120 L 115 120" stroke="#455A64" stroke-width="2"/>
+  <path d="M85 130 L 115 130" stroke="#455A64" stroke-width="2"/>
+  <path d="M85 140 L 115 140" stroke="#455A64" stroke-width="2"/>
+  <path d="M85 150 L 115 150" stroke="#455A64" stroke-width="2"/>
+  <path d="M85 160 L 115 160" stroke="#455A64" stroke-width="2"/>
+  <path d="M85 170 L 115 170" stroke="#455A64" stroke-width="2"/>
+  
+  <!-- Rivets -->
+  <circle cx="85" cy="125" r="2" fill="#455A64"/>
+  <circle cx="115" cy="125" r="2" fill="#455A64"/>
+  <circle cx="85" cy="145" r="2" fill="#455A64"/>
+  <circle cx="115" cy="145" r="2" fill="#455A64"/>
+  <circle cx="85" cy="165" r="2" fill="#455A64"/>
+  <circle cx="115" cy="165" r="2" fill="#455A64"/>
+  
+  <!-- Head -->
+  <path d="M80 70 L 70 40 L 100 30 L 130 40 L 120 70 Z" fill="#90A4AE"/>
+  <circle cx="100" cy="70" r="30" fill="#90A4AE"/>
+  
+  <!-- Helmet Details -->
+  <path d="M70 60 L 130 60" stroke="#455A64" stroke-width="2"/>
+  <path d="M75 50 L 125 50" stroke="#455A64" stroke-width="2"/>
+  <path d="M80 40 L 120 40" stroke="#455A64" stroke-width="2"/>
+  
+  <!-- Antenna -->
+  <path d="M100 30 L 100 15" stroke="#CFD8DC" stroke-width="2"/>
+  <circle cx="100" cy="15" r="3" fill="#CFD8DC"/>
+  
+  <!-- Visor -->
+  <path d="M80 65 L 120 65" stroke="#00BCD4" stroke-width="4"/>
+  
+  <!-- Eyes - Normal -->
+  <g class="eyes-normal">
+    <rect x="85" y="60" width="10" height="10" fill="#00BCD4" rx="2" ry="2"/>
+    <rect x="105" y="60" width="10" height="10" fill="#00BCD4" rx="2" ry="2"/>
+  </g>
+  
+  <!-- Eyes - Pain (initially hidden) -->
+  <g class="eyes-pain" style="display: none;">
+    <rect x="85" y="60" width="10" height="10" fill="#F44336" rx="2" ry="2"/>
+    <rect x="105" y="60" width="10" height="10" fill="#F44336" rx="2" ry="2"/>
+  </g>
+  
+  <!-- Mouth - Normal -->
+  <g class="mouth-normal">
+    <path d="M90 80 L 110 80" stroke="#455A64" stroke-width="2"/>
+  </g>
+  
+  <!-- Mouth - Pain (initially hidden) -->
+  <g class="mouth-pain" style="display: none;">
+    <path d="M90 80 L 95 85 L 100 80 L 105 85 L 110 80" stroke="#455A64" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Shoulders -->
+  <rect x="65" y="100" width="20" height="20" fill="#78909C" rx="5" ry="5"/>
+  <rect x="115" y="100" width="20" height="20" fill="#78909C" rx="5" ry="5"/>
+  
+  <!-- Arms -->
+  <path d="M65 110 L 45 140 L 40 170" fill="none" stroke="#90A4AE" stroke-width="8"/>
+  <path d="M135 110 L 155 140 L 160 170" fill="none" stroke="#90A4AE" stroke-width="8"/>
+  
+  <!-- Hands -->
+  <circle cx="40" cy="170" r="10" fill="#78909C" stroke="#455A64" stroke-width="1"/>
+  <circle cx="160" cy="170" r="10" fill="#78909C" stroke="#455A64" stroke-width="1"/>
+  
+  <!-- Fingers -->
+  <path d="M35 165 L 30 160" stroke="#455A64" stroke-width="2"/>
+  <path d="M35 170 L 28 170" stroke="#455A64" stroke-width="2"/>
+  <path d="M35 175 L 30 180" stroke="#455A64" stroke-width="2"/>
+  
+  <path d="M165 165 L 170 160" stroke="#455A64" stroke-width="2"/>
+  <path d="M165 170 L 172 170" stroke="#455A64" stroke-width="2"/>
+  <path d="M165 175 L 170 180" stroke="#455A64" stroke-width="2"/>
+  
+  <!-- Legs -->
+  <rect x="85" y="180" width="10" height="15" fill="#78909C"/>
+  <rect x="105" y="180" width="10" height="15" fill="#78909C"/>
+  
+  <!-- Feet -->
+  <rect x="80" y="195" width="20" height="5" fill="#455A64" rx="2" ry="2"/>
+  <rect x="100" y="195" width="20" height="5" fill="#455A64" rx="2" ry="2"/>
+  
+  <!-- Power Core -->
+  <circle cx="100" cy="135" r="10" fill="#00BCD4" stroke="#455A64" stroke-width="1">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
+  </circle>
+</svg> 

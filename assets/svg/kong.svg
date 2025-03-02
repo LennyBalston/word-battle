@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#5D4037" rx="10" ry="10"/>
+  
+  <!-- Body -->
+  <path d="M75 110 L 75 180 L 125 180 L 125 110 Z" fill="#8D6E63"/>
+  
+  <!-- Head -->
+  <circle cx="100" cy="70" r="40" fill="#8D6E63"/>
+  
+  <!-- Fur -->
+  <path d="M60 70 Q 70 30 100 40 Q 130 30 140 70" fill="#5D4037"/>
+  <path d="M60 70 Q 70 40 100 50 Q 130 40 140 70" fill="#5D4037"/>
+  
+  <!-- Eyes - Normal -->
+  <g class="eyes-normal">
+    <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
+    <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
+    <circle cx="85" cy="65" r="3" fill="#3E2723"/>
+    <circle cx="115" cy="65" r="3" fill="#3E2723"/>
+  </g>
+  
+  <!-- Eyes - Pain (initially hidden) -->
+  <g class="eyes-pain" style="display: none;">
+    <path d="M80 65 L 90 65" stroke="#3E2723" stroke-width="2"/>
+    <path d="M110 65 L 120 65" stroke="#3E2723" stroke-width="2"/>
+  </g>
+  
+  <!-- Eyebrows - Normal -->
+  <g class="eyebrows-normal">
+    <path d="M75 55 Q 85 48 95 55" stroke="#3E2723" stroke-width="3" fill="none"/>
+    <path d="M105 55 Q 115 48 125 55" stroke="#3E2723" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Eyebrows - Pain (initially hidden) -->
+  <g class="eyebrows-pain" style="display: none;">
+    <path d="M75 50 Q 85 60 95 50" stroke="#3E2723" stroke-width="3" fill="none"/>
+    <path d="M105 50 Q 115 60 125 50" stroke="#3E2723" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Mouth - Normal -->
+  <g class="mouth-normal">
+    <path d="M85 85 Q 100 90 115 85" stroke="#3E2723" stroke-width="2" fill="none"/>
+    <!-- Teeth -->
+    <path d="M95 85 L 95 88" stroke="#FFF" stroke-width="2"/>
+    <path d="M100 86 L 100 89" stroke="#FFF" stroke-width="2"/>
+    <path d="M105 85 L 105 88" stroke="#FFF" stroke-width="2"/>
+  </g>
+  
+  <!-- Mouth - Pain (initially hidden) -->
+  <g class="mouth-pain" style="display: none;">
+    <path d="M85 95 Q 100 105 115 95" stroke="#3E2723" stroke-width="3" fill="none"/>
+    <path d="M95 100 L 105 100" stroke="#3E2723" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Nose -->
+  <path d="M95 75 L 100 80 L 105 75 Z" fill="#3E2723"/>
+  
+  <!-- Arms -->
+  <path d="M75 120 L 50 150 L 45 180" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
+  <path d="M125 120 L 150 150 L 155 180" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
+  
+  <!-- Hands -->
+  <path d="M45 180 C 40 185 40 190 45 190 C 50 190 55 185 55 180 Z" fill="#8D6E63" stroke="#5D4037" stroke-width="1"/>
+  <path d="M155 180 C 160 185 160 190 155 190 C 150 190 145 185 145 180 Z" fill="#8D6E63" stroke="#5D4037" stroke-width="1"/>
+</svg> 

@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#FFC107" rx="10" ry="10"/>
+  
+  <!-- Body -->
+  <path d="M75 110 L 75 180 L 125 180 L 125 110 Z" fill="#FFD54F"/>
+  
+  <!-- Wings -->
+  <path d="M75 110 L 30 80 L 20 130 L 50 150 L 75 140" fill="#FFE082" stroke="#FFA000" stroke-width="1"/>
+  <path d="M125 110 L 170 80 L 180 130 L 150 150 L 125 140" fill="#FFE082" stroke="#FFA000" stroke-width="1"/>
+  
+  <!-- Tails -->
+  <path d="M100 180 L 110 190 L 120 195 L 130 190" fill="#FFD54F" stroke="#FFA000" stroke-width="2"/>
+  
+  <!-- Three Heads -->
+  <!-- Left Head -->
+  <g transform="translate(-25, 0)">
+    <path d="M85 70 L 80 40 L 100 30 L 110 40 L 105 70 Z" fill="#FFD54F"/>
+    <circle cx="95" cy="60" r="15" fill="#FFD54F"/>
+    
+    <!-- Eyes - Normal -->
+    <g class="eyes-normal">
+      <ellipse cx="90" cy="55" rx="3" ry="4" fill="#FFF"/>
+      <circle cx="90" cy="55" r="1.5" fill="#FF6F00"/>
+    </g>
+    
+    <!-- Eyes - Pain (initially hidden) -->
+    <g class="eyes-pain" style="display: none;">
+      <path d="M87 55 L 93 55" stroke="#FF6F00" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Mouth -->
+    <g class="mouth-normal">
+      <path d="M85 65 L 95 67 L 105 65" stroke="#FF6F00" stroke-width="1" fill="none"/>
+    </g>
+    
+    <!-- Mouth - Pain (initially hidden) -->
+    <g class="mouth-pain" style="display: none;">
+      <path d="M85 67 L 95 70 L 105 67" stroke="#FF6F00" stroke-width="1.5" fill="none"/>
+    </g>
+    
+    <!-- Horns -->
+    <path d="M85 45 L 80 35" stroke="#FFA000" stroke-width="2"/>
+    <path d="M105 45 L 110 35" stroke="#FFA000" stroke-width="2"/>
+  </g>
+  
+  <!-- Middle Head (slightly higher) -->
+  <g transform="translate(0, -10)">
+    <path d="M85 70 L 80 40 L 100 30 L 120 40 L 115 70 Z" fill="#FFD54F"/>
+    <circle cx="100" cy="60" r="15" fill="#FFD54F"/>
+    
+    <!-- Eyes - Normal -->
+    <g class="eyes-normal">
+      <ellipse cx="95" cy="55" rx="3" ry="4" fill="#FFF"/>
+      <ellipse cx="105" cy="55" rx="3" ry="4" fill="#FFF"/>
+      <circle cx="95" cy="55" r="1.5" fill="#FF6F00"/>
+      <circle cx="105" cy="55" r="1.5" fill="#FF6F00"/>
+    </g>
+    
+    <!-- Eyes - Pain (initially hidden) -->
+    <g class="eyes-pain" style="display: none;">
+      <path d="M92 55 L 98 55" stroke="#FF6F00" stroke-width="1.5"/>
+      <path d="M102 55 L 108 55" stroke="#FF6F00" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Mouth -->
+    <g class="mouth-normal">
+      <path d="M90 65 L 100 67 L 110 65" stroke="#FF6F00" stroke-width="1" fill="none"/>
+    </g>
+    
+    <!-- Mouth - Pain (initially hidden) -->
+    <g class="mouth-pain" style="display: none;">
+      <path d="M90 67 L 100 70 L 110 67" stroke="#FF6F00" stroke-width="1.5" fill="none"/>
+    </g>
+    
+    <!-- Horns -->
+    <path d="M90 45 L 85 30" stroke="#FFA000" stroke-width="2"/>
+    <path d="M110 45 L 115 30" stroke="#FFA000" stroke-width="2"/>
+    <path d="M100 40 L 100 25" stroke="#FFA000" stroke-width="2"/>
+  </g>
+  
+  <!-- Right Head -->
+  <g transform="translate(25, 0)">
+    <path d="M85 70 L 80 40 L 100 30 L 110 40 L 105 70 Z" fill="#FFD54F"/>
+    <circle cx="95" cy="60" r="15" fill="#FFD54F"/>
+    
+    <!-- Eyes - Normal -->
+    <g class="eyes-normal">
+      <ellipse cx="100" cy="55" rx="3" ry="4" fill="#FFF"/>
+      <circle cx="100" cy="55" r="1.5" fill="#FF6F00"/>
+    </g>
+    
+    <!-- Eyes - Pain (initially hidden) -->
+    <g class="eyes-pain" style="display: none;">
+      <path d="M97 55 L 103 55" stroke="#FF6F00" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Mouth -->
+    <g class="mouth-normal">
+      <path d="M85 65 L 95 67 L 105 65" stroke="#FF6F00" stroke-width="1" fill="none"/>
+    </g>
+    
+    <!-- Mouth - Pain (initially hidden) -->
+    <g class="mouth-pain" style="display: none;">
+      <path d="M85 67 L 95 70 L 105 67" stroke="#FF6F00" stroke-width="1.5" fill="none"/>
+    </g>
+    
+    <!-- Horns -->
+    <path d="M85 45 L 80 35" stroke="#FFA000" stroke-width="2"/>
+    <path d="M105 45 L 110 35" stroke="#FFA000" stroke-width="2"/>
+  </g>
+  
+  <!-- Neck -->
+  <path d="M75 110 L 70 90 L 65 70" fill="#FFD54F" stroke="#FFA000" stroke-width="1"/>
+  <path d="M100 110 L 100 90 L 100 60" fill="#FFD54F" stroke="#FFA000" stroke-width="1"/>
+  <path d="M125 110 L 130 90 L 135 70" fill="#FFD54F" stroke="#FFA000" stroke-width="1"/>
+  
+  <!-- Scales -->
+  <path d="M85 120 L 90 125 L 95 120 L 100 125 L 105 120 L 110 125 L 115 120" stroke="#FFA000" stroke-width="1" fill="none"/>
+  <path d="M85 140 L 90 145 L 95 140 L 100 145 L 105 140 L 110 145 L 115 140" stroke="#FFA000" stroke-width="1" fill="none"/>
+  <path d="M85 160 L 90 165 L 95 160 L 100 165 L 105 160 L 110 165 L 115 160" stroke="#FFA000" stroke-width="1" fill="none"/>
+</svg> 
