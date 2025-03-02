@@ -224,6 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("player2Avatar", player2Selection);
 
     // Redirect to the game page
-    window.location.href = "index.html";
+    window.location.href = "game.html";
   }
 });

@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   resetButton.addEventListener("click", resetGame);
   if (backToSelectionButton) {
     backToSelectionButton.addEventListener("click", () => {
-      window.location.href = "selection.html";
+      window.location.href = "index.html";
     });
   }
 
