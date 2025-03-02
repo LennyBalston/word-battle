@@ -130,6 +130,22 @@ h1 {
   color: #f44336;
 }
 
+.battle-log .info {
+  color: #2196f3;
+  font-style: italic;
+}
+
+.battle-log .error {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.battle-log .game-over {
+  color: #e91e63;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 .game-controls {
   text-align: center;
 }
@@ -155,6 +171,11 @@ h1 {
   background-color: #e6e6e6;
 }
 
+#attack-word:disabled {
+  background-color: #cccccc;
+  color: #666666;
+}
+
 #attack-button {
   padding: 12px 25px;
   background-color: #e94560;
@@ -169,6 +190,11 @@ h1 {
 
 #attack-button:hover {
   background-color: #d13651;
+}
+
+#attack-button:disabled {
+  background-color: #b3b3b3;
+  cursor: not-allowed;
 }
 
 .reset-button {

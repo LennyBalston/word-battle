@@ -24,6 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let player2HealthValue = 100;
   let gameOver = false;
   let usedWords = new Set();
+  let isCheckingWord = false;
+
+  // Dictionary cache to reduce API calls
+  const wordCache = new Map();
 
   // Initialize the game
   initGame();
@@ -146,51 +150,157 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Handle attack
-  function handleAttack() {
-    if (gameOver) return;
+  async function handleAttack() {
+    if (gameOver || isCheckingWord) return;
 
     const word = attackWord.value.trim().toLowerCase();
 
-    // Validate the word
-    if (!isValidWord(word)) return;
+    // Basic validation
+    if (!isBasicValidWord(word)) return;
 
-    // Calculate damage based on word
-    const damage = calculateDamage(word);
+    // Set checking state to prevent multiple submissions
+    isCheckingWord = true;
+    attackButton.disabled = true;
+    attackWord.disabled = true;
 
-    // Apply damage to the opponent
-    if (currentPlayer === 1) {
-      player2HealthValue = Math.max(0, player2HealthValue - damage);
-      animateAttack(player2Element, damage);
-      logAttack(1, word, damage);
-    } else {
-      player1HealthValue = Math.max(0, player1HealthValue - damage);
-      animateAttack(player1Element, damage);
-      logAttack(2, word, damage);
+    // Show checking message
+    addToBattleLog(
+      `Checking if "${word}" is a valid British English word...`,
+      "info"
+    );
+
+    try {
+      // Check if it's a real British English word
+      const isRealWord = await checkIfRealWord(word);
+
+      if (!isRealWord) {
+        addToBattleLog(
+          `"${word}" is not a valid British English word! No damage dealt.`,
+          "error"
+        );
+
+        // Switch player without dealing damage
+        currentPlayer = currentPlayer === 1 ? 2 : 1;
+        updatePlayerTurn();
+
+        // Add to used words so it can't be tried again
+        usedWords.add(word);
+
+        // Clear input and re-enable controls
+        attackWord.value = "";
+        attackWord.disabled = false;
+        attackButton.disabled = false;
+        attackWord.focus();
+        isCheckingWord = false;
+        return;
+      }
+
+      // Word is valid, calculate damage
+      const damage = calculateDamage(word);
+
+      // Apply damage to the opponent
+      if (currentPlayer === 1) {
+        player2HealthValue = Math.max(0, player2HealthValue - damage);
+        animateAttack(player2Element, damage);
+        logAttack(1, word, damage);
+      } else {
+        player1HealthValue = Math.max(0, player1HealthValue - damage);
+        animateAttack(player1Element, damage);
+        logAttack(2, word, damage);
+      }
+
+      // Add word to used words
+      usedWords.add(word);
+
+      // Update UI
+      updateHealthBars();
+
+      // Check for game over
+      if (player1HealthValue <= 0 || player2HealthValue <= 0) {
+        endGame();
+        isCheckingWord = false;
+        return;
+      }
+
+      // Switch player
+      currentPlayer = currentPlayer === 1 ? 2 : 1;
+      updatePlayerTurn();
+    } catch (error) {
+      console.error("Error checking word:", error);
+      addToBattleLog("Error checking word. Please try again.", "error");
+    } finally {
+      // Clear input and re-enable controls
+      attackWord.value = "";
+      attackWord.disabled = false;
+      attackButton.disabled = false;
+      attackWord.focus();
+      isCheckingWord = false;
     }
-
-    // Add word to used words
-    usedWords.add(word);
-
-    // Update UI
-    updateHealthBars();
-
-    // Check for game over
-    if (player1HealthValue <= 0 || player2HealthValue <= 0) {
-      endGame();
-      return;
-    }
-
-    // Switch player
-    currentPlayer = currentPlayer === 1 ? 2 : 1;
-    updatePlayerTurn();
-
-    // Clear input
-    attackWord.value = "";
-    attackWord.focus();
   }
 
-  // Validate word
-  function isValidWord(word) {
+  // Check if word is a real British English word using a dictionary API
+  async function checkIfRealWord(word) {
+    // Check cache first
+    if (wordCache.has(word)) {
+      return wordCache.get(word);
+    }
+
+    try {
+      // Using the WordsAPI which supports British English
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":
+            "3c9c7f9f9dmsh9a0c4e2a3c0c8c1p1c9f8fjsn3d6f9c1c1c1c",
+          "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com",
+        },
+      };
+
+      const response = await fetch(
+        `https://wordsapiv1.p.rapidapi.com/words/${word}`,
+        options
+      );
+
+      // If we can't use the API, fall back to the free dictionary API
+      if (!response.ok) {
+        // Fallback to the Free Dictionary API
+        const fallbackResponse = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en_GB/${word}`
+        );
+        const isValid = fallbackResponse.ok;
+        wordCache.set(word, isValid);
+        return isValid;
+      }
+
+      const data = await response.json();
+
+      // Check if the word has British English definitions or pronunciations
+      const isValid = data && (data.results || data.pronunciation);
+
+      // Cache the result
+      wordCache.set(word, isValid);
+      return isValid;
+    } catch (error) {
+      console.error("Dictionary API error:", error);
+
+      try {
+        // Fallback to the Free Dictionary API with British English locale
+        const fallbackResponse = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en_GB/${word}`
+        );
+        const isValid = fallbackResponse.ok;
+        wordCache.set(word, isValid);
+        return isValid;
+      } catch (fallbackError) {
+        console.error("Fallback dictionary API error:", fallbackError);
+        // If both APIs fail, we'll assume the word is valid to keep the game going
+        return true;
+      }
+    }
+  }
+
+  // Basic word validation (before dictionary check)
+  function isBasicValidWord(word) {
     if (!word) {
       addToBattleLog("Please enter a word!", "error");
       return false;
@@ -206,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
-    // Only allow letters and basic punctuation
+    // Only allow letters
     if (!/^[a-z]+$/i.test(word)) {
       addToBattleLog("Word must contain only letters!", "error");
       return false;

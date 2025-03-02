@@ -17,6 +17,8 @@ A fun two-player word battle game where players take turns attacking each other 
 
 - Words must be at least 2 characters long
 - Words can only contain letters (no numbers, spaces, or special characters)
+- Words must be real British English words (verified against a dictionary)
+- If a player uses a word that's not in the dictionary, they score 0 damage and their turn ends
 - Each word can only be used once per game
 - Players take turns - Player 1 goes first
 
@@ -27,6 +29,22 @@ A fun two-player word battle game where players take turns attacking each other 
 - Bonus for word length:
   - 6-7 letters: +3 damage
   - 8+ letters: +5 damage
+- Non-dictionary words: 0 damage
+
+## Dictionary Validation
+
+The game uses a combination of dictionary APIs to validate that words are real British English words:
+
+1. **Primary API**: WordsAPI with British English support
+2. **Fallback API**: Free Dictionary API with British English locale (en_GB)
+
+If a word is not found in the dictionary:
+
+- No damage is dealt
+- The player's turn ends
+- The word is still marked as used and cannot be tried again
+
+The game also implements a word cache to improve performance and reduce API calls.
 
 ## Files
 
