@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monster Mayhem: Word Battle!</title>
+    <meta http-equiv="refresh" content="0; URL=selection.html" />
+    <style>
+      body {
+        background-color: #1a1a2e;
+        color: #e6e6e6;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url("https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+      .loading {
+        text-align: center;
+        padding: 30px;
+        background-color: rgba(22, 33, 62, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 3px solid #ff9a3c;
+      }
+      h1 {
+        color: #ff9a3c;
+        margin-bottom: 20px;
+        font-family: Impact, sans-serif;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      p {
+        margin-bottom: 20px;
+      }
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 154, 60, 0.3);
+        border-radius: 50%;
+        border-top-color: #ff9a3c;
+        animation: spin 1s ease-in-out infinite;
+        margin: 0 auto;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      a {
+        color: #ff9a3c;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <h1>Monster Mayhem</h1>
+      <p>Loading the battle arena...</p>
+      <div class="spinner"></div>
+      <p>
+        If you are not redirected automatically,
+        <a href="selection.html">click here</a>.
+      </p>
+    </div>
+    <script>
+      // Redirect to selection page
+      window.location.href = "selection.html";
+    </script>
+  </body>
+</html>

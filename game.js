@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetButton = document.getElementById("reset-game");
   const player1Element = document.querySelector(".player-1");
   const player2Element = document.querySelector(".player-2");
+  const backToSelectionButton = document.getElementById("back-to-selection");
 
   // Available avatars
   const availableAvatars = [
@@ -54,11 +55,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   resetButton.addEventListener("click", resetGame);
+  if (backToSelectionButton) {
+    backToSelectionButton.addEventListener("click", () => {
+      window.location.href = "selection.html";
+    });
+  }
 
   // Initialize the game
   function initGame() {
-    // Create avatar selection UI
-    createAvatarSelectionUI();
+    // Load avatar selections from localStorage
+    loadAvatarSelections();
 
     // Set player avatars
     setPlayerAvatars();
@@ -68,88 +74,19 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePlayerTurn();
   }
 
-  // Create avatar selection UI
-  function createAvatarSelectionUI() {
-    // Create player 1 avatar selector
-    const player1Selector = document.createElement("div");
-    player1Selector.className = "avatar-selector";
-    player1Selector.innerHTML = `
-      <h3>Player 1 Avatar</h3>
-      <div class="avatar-preview" id="player1-avatar-preview"></div>
-      <select id="player1-avatar-select">
-        ${availableAvatars
-          .map(
-            (avatar, index) =>
-              `<option value="${index}" ${index === 0 ? "selected" : ""}>${
-                avatar.name
-              }</option>`
-          )
-          .join("")}
-      </select>
-    `;
+  // Load avatar selections from localStorage
+  function loadAvatarSelections() {
+    const player1Selection = localStorage.getItem("player1Avatar");
+    const player2Selection = localStorage.getItem("player2Avatar");
 
-    // Create player 2 avatar selector
-    const player2Selector = document.createElement("div");
-    player2Selector.className = "avatar-selector";
-    player2Selector.innerHTML = `
-      <h3>Player 2 Avatar</h3>
-      <div class="avatar-preview" id="player2-avatar-preview"></div>
-      <select id="player2-avatar-select">
-        ${availableAvatars
-          .map(
-            (avatar, index) =>
-              `<option value="${index}" ${index === 1 ? "selected" : ""}>${
-                avatar.name
-              }</option>`
-          )
-          .join("")}
-      </select>
-    `;
+    // If selections exist in localStorage, use them
+    if (player1Selection !== null) {
+      player1Avatar = availableAvatars[parseInt(player1Selection)];
+    }
 
-    // Add selectors to the game container
-    const gameContainer = document.querySelector(".game-container");
-    const gameControls = document.querySelector(".game-controls");
-    gameContainer.insertBefore(player1Selector, gameControls);
-    gameContainer.insertBefore(player2Selector, gameControls);
-
-    // Load initial avatar previews
-    loadSVG(
-      `assets/svg/${player1Avatar.file}`,
-      document.getElementById("player1-avatar-preview")
-    );
-    loadSVG(
-      `assets/svg/${player2Avatar.file}`,
-      document.getElementById("player2-avatar-preview")
-    );
-
-    // Add event listeners for avatar selection
-    document
-      .getElementById("player1-avatar-select")
-      .addEventListener("change", (e) => {
-        player1Avatar = availableAvatars[parseInt(e.target.value)];
-        setPlayerAvatars();
-        // Update preview
-        loadSVG(
-          `assets/svg/${player1Avatar.file}`,
-          document.getElementById("player1-avatar-preview")
-        );
-        updatePlayerNames();
-        updatePlayerTurn();
-      });
-
-    document
-      .getElementById("player2-avatar-select")
-      .addEventListener("change", (e) => {
-        player2Avatar = availableAvatars[parseInt(e.target.value)];
-        setPlayerAvatars();
-        // Update preview
-        loadSVG(
-          `assets/svg/${player2Avatar.file}`,
-          document.getElementById("player2-avatar-preview")
-        );
-        updatePlayerNames();
-        updatePlayerTurn();
-      });
+    if (player2Selection !== null) {
+      player2Avatar = availableAvatars[parseInt(player2Selection)];
+    }
   }
 
   // Set player avatars
