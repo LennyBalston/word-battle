@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function setPlayerAvatars() {
     // Player 1 SVG
     const player1SVG = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
         <!-- Background -->
         <rect width="200" height="200" fill="#4CAF50" rx="10" ry="10"/>
         
@@ -69,18 +69,42 @@ document.addEventListener("DOMContentLoaded", () => {
         <path d="M60 70 Q 70 30 100 40 Q 130 30 140 70" fill="#5D4037"/>
         <path d="M60 70 Q 70 40 100 50 Q 130 40 140 70" fill="#5D4037"/>
         
-        <!-- Eyes -->
-        <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
-        <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
-        <circle cx="85" cy="65" r="3" fill="#263238"/>
-        <circle cx="115" cy="65" r="3" fill="#263238"/>
+        <!-- Eyes - Normal -->
+        <g class="eyes-normal">
+          <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
+          <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
+          <circle cx="85" cy="65" r="3" fill="#263238"/>
+          <circle cx="115" cy="65" r="3" fill="#263238"/>
+        </g>
         
-        <!-- Eyebrows -->
-        <path d="M80 55 Q 85 52 90 55" stroke="#5D4037" stroke-width="2" fill="none"/>
-        <path d="M110 55 Q 115 52 120 55" stroke="#5D4037" stroke-width="2" fill="none"/>
+        <!-- Eyes - Pain (initially hidden) -->
+        <g class="eyes-pain" style="display: none;">
+          <path d="M80 65 L 90 65" stroke="#263238" stroke-width="2"/>
+          <path d="M110 65 L 120 65" stroke="#263238" stroke-width="2"/>
+        </g>
         
-        <!-- Mouth -->
-        <path d="M90 90 Q 100 100 110 90" stroke="#263238" stroke-width="2" fill="none"/>
+        <!-- Eyebrows - Normal -->
+        <g class="eyebrows-normal">
+          <path d="M80 55 Q 85 52 90 55" stroke="#5D4037" stroke-width="2" fill="none"/>
+          <path d="M110 55 Q 115 52 120 55" stroke="#5D4037" stroke-width="2" fill="none"/>
+        </g>
+        
+        <!-- Eyebrows - Pain (initially hidden) -->
+        <g class="eyebrows-pain" style="display: none;">
+          <path d="M80 50 Q 85 55 90 50" stroke="#5D4037" stroke-width="2" fill="none"/>
+          <path d="M110 50 Q 115 55 120 50" stroke="#5D4037" stroke-width="2" fill="none"/>
+        </g>
+        
+        <!-- Mouth - Normal -->
+        <g class="mouth-normal">
+          <path d="M90 90 Q 100 100 110 90" stroke="#263238" stroke-width="2" fill="none"/>
+        </g>
+        
+        <!-- Mouth - Pain (initially hidden) -->
+        <g class="mouth-pain" style="display: none;">
+          <path d="M90 95 Q 100 85 110 95" stroke="#263238" stroke-width="2" fill="none"/>
+          <path d="M95 90 L 105 90" stroke="#263238" stroke-width="1" fill="none"/>
+        </g>
         
         <!-- Nose -->
         <path d="M100 70 L 97 80 L 103 80 Z" fill="#FFD0A1"/>
@@ -100,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Player 2 SVG
     const player2SVG = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 200 200" class="player-svg">
         <!-- Background -->
         <rect width="200" height="200" fill="#F44336" rx="10" ry="10"/>
         
@@ -114,19 +138,43 @@ document.addEventListener("DOMContentLoaded", () => {
         <path d="M60 50 L 60 70 L 140 70 L 140 50 Q 100 20 60 50" fill="#263238"/>
         <path d="M60 50 L 60 70 L 140 70 L 140 50 Q 100 30 60 50" fill="#263238"/>
         
-        <!-- Eyes -->
-        <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
-        <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
-        <circle cx="85" cy="65" r="3" fill="#263238"/>
-        <circle cx="115" cy="65" r="3" fill="#263238"/>
+        <!-- Eyes - Normal -->
+        <g class="eyes-normal">
+          <ellipse cx="85" cy="65" rx="5" ry="7" fill="#FFF"/>
+          <ellipse cx="115" cy="65" rx="5" ry="7" fill="#FFF"/>
+          <circle cx="85" cy="65" r="3" fill="#263238"/>
+          <circle cx="115" cy="65" r="3" fill="#263238"/>
+        </g>
         
-        <!-- Eyebrows -->
-        <path d="M80 55 Q 85 50 90 55" stroke="#263238" stroke-width="2" fill="none"/>
-        <path d="M110 55 Q 115 50 120 55" stroke="#263238" stroke-width="2" fill="none"/>
+        <!-- Eyes - Pain (initially hidden) -->
+        <g class="eyes-pain" style="display: none;">
+          <path d="M80 65 L 90 65" stroke="#263238" stroke-width="2"/>
+          <path d="M110 65 L 120 65" stroke="#263238" stroke-width="2"/>
+        </g>
         
-        <!-- Mouth -->
-        <path d="M90 85 Q 100 80 110 85" stroke="#263238" stroke-width="2" fill="none"/>
-        <path d="M90 85 Q 100 90 110 85" stroke="#263238" stroke-width="2" fill="none"/>
+        <!-- Eyebrows - Normal -->
+        <g class="eyebrows-normal">
+          <path d="M80 55 Q 85 50 90 55" stroke="#263238" stroke-width="2" fill="none"/>
+          <path d="M110 55 Q 115 50 120 55" stroke="#263238" stroke-width="2" fill="none"/>
+        </g>
+        
+        <!-- Eyebrows - Pain (initially hidden) -->
+        <g class="eyebrows-pain" style="display: none;">
+          <path d="M80 50 Q 85 55 90 50" stroke="#263238" stroke-width="2" fill="none"/>
+          <path d="M110 50 Q 115 55 120 50" stroke="#263238" stroke-width="2" fill="none"/>
+        </g>
+        
+        <!-- Mouth - Normal -->
+        <g class="mouth-normal">
+          <path d="M90 85 Q 100 80 110 85" stroke="#263238" stroke-width="2" fill="none"/>
+          <path d="M90 85 Q 100 90 110 85" stroke="#263238" stroke-width="2" fill="none"/>
+        </g>
+        
+        <!-- Mouth - Pain (initially hidden) -->
+        <g class="mouth-pain" style="display: none;">
+          <path d="M90 95 Q 100 85 110 95" stroke="#263238" stroke-width="2" fill="none"/>
+          <path d="M95 90 L 105 90" stroke="#263238" stroke-width="1" fill="none"/>
+        </g>
         
         <!-- Nose -->
         <path d="M100 70 L 97 80 L 103 80 Z" fill="#FFD0A1"/>
@@ -368,9 +416,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function animateAttack(targetElement, damage) {
     // Shake animation
     targetElement.classList.add("attack-animation");
-    setTimeout(() => {
-      targetElement.classList.remove("attack-animation");
-    }, 500);
+
+    // Get the avatar SVG
+    const avatarSvg = targetElement.querySelector(".player-svg");
+
+    // Get the avatar container
+    const avatarContainer = targetElement.querySelector(".player-avatar");
+
+    // Show pain expression
+    showPainExpression(avatarSvg, true);
+
+    // Add sweat drops for higher damage
+    if (damage > 10) {
+      addSweatDrops(avatarContainer);
+    }
 
     // Damage text animation
     const damageText = document.createElement("div");
@@ -384,9 +443,77 @@ document.addEventListener("DOMContentLoaded", () => {
     }px`;
     document.body.appendChild(damageText);
 
+    // Reset animations after delay
+    setTimeout(() => {
+      targetElement.classList.remove("attack-animation");
+      showPainExpression(avatarSvg, false);
+      removeSweatDrops(avatarContainer);
+    }, 1000);
+
     setTimeout(() => {
       document.body.removeChild(damageText);
     }, 1000);
+  }
+
+  // Show pain expression on avatar
+  function showPainExpression(avatarSvg, showPain) {
+    if (!avatarSvg) return;
+
+    // Get facial expression elements
+    const eyesNormal = avatarSvg.querySelector(".eyes-normal");
+    const eyesPain = avatarSvg.querySelector(".eyes-pain");
+    const eyebrowsNormal = avatarSvg.querySelector(".eyebrows-normal");
+    const eyebrowsPain = avatarSvg.querySelector(".eyebrows-pain");
+    const mouthNormal = avatarSvg.querySelector(".mouth-normal");
+    const mouthPain = avatarSvg.querySelector(".mouth-pain");
+
+    if (showPain) {
+      // Show pain expression
+      if (eyesNormal) eyesNormal.style.display = "none";
+      if (eyesPain) eyesPain.style.display = "block";
+      if (eyebrowsNormal) eyebrowsNormal.style.display = "none";
+      if (eyebrowsPain) eyebrowsPain.style.display = "block";
+      if (mouthNormal) mouthNormal.style.display = "none";
+      if (mouthPain) mouthPain.style.display = "block";
+    } else {
+      // Show normal expression
+      if (eyesNormal) eyesNormal.style.display = "block";
+      if (eyesPain) eyesPain.style.display = "none";
+      if (eyebrowsNormal) eyebrowsNormal.style.display = "block";
+      if (eyebrowsPain) eyebrowsPain.style.display = "none";
+      if (mouthNormal) mouthNormal.style.display = "block";
+      if (mouthPain) mouthPain.style.display = "none";
+    }
+  }
+
+  // Add sweat drops for high damage
+  function addSweatDrops(targetElement) {
+    // Create sweat drops
+    const sweatContainer = document.createElement("div");
+    sweatContainer.className = "sweat-container";
+
+    // Add multiple sweat drops
+    for (let i = 0; i < 3; i++) {
+      const sweatDrop = document.createElement("div");
+      sweatDrop.className = "sweat-drop";
+      sweatDrop.style.left = `${30 + i * 20}px`;
+      sweatDrop.style.animationDelay = `${i * 0.2}s`;
+      sweatContainer.appendChild(sweatDrop);
+    }
+
+    // Remove any existing sweat drops
+    removeSweatDrops(targetElement);
+
+    // Add to the target element
+    targetElement.appendChild(sweatContainer);
+  }
+
+  // Remove sweat drops
+  function removeSweatDrops(targetElement) {
+    const existingSweat = targetElement.querySelector(".sweat-container");
+    if (existingSweat) {
+      targetElement.removeChild(existingSweat);
+    }
   }
 
   // Update health bars
