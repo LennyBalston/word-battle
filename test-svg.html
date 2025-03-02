@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .svg-container {
+        display: inline-block;
+        width: 120px;
+        height: 120px;
+        margin: 10px;
+        border: 1px solid #ccc;
+      }
+      h2 {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SVG Test Page</h1>
+
+    <h2>Direct IMG Tags</h2>
+    <div>
+      <div class="svg-container">
+        <img
+          src="assets/svg/godzilla.svg"
+          alt="Godzilla"
+          width="120"
+          height="120"
+        />
+      </div>
+      <div class="svg-container">
+        <img
+          src="assets/svg/kong.svg"
+          alt="King Kong"
+          width="120"
+          height="120"
+        />
+      </div>
+      <div class="svg-container">
+        <img
+          src="assets/svg/mothra.svg"
+          alt="Mothra"
+          width="120"
+          height="120"
+        />
+      </div>
+      <div class="svg-container">
+        <img
+          src="assets/svg/ghidorah.svg"
+          alt="Ghidorah"
+          width="120"
+          height="120"
+        />
+      </div>
+      <div class="svg-container">
+        <img src="assets/svg/rodan.svg" alt="Rodan" width="120" height="120" />
+      </div>
+      <div class="svg-container">
+        <img src="assets/svg/mecha.svg" alt="Mecha" width="120" height="120" />
+      </div>
+    </div>
+
+    <h2>Object Tags</h2>
+    <div>
+      <div class="svg-container">
+        <object
+          data="assets/svg/godzilla.svg"
+          type="image/svg+xml"
+          width="120"
+          height="120"
+        ></object>
+      </div>
+      <div class="svg-container">
+        <object
+          data="assets/svg/kong.svg"
+          type="image/svg+xml"
+          width="120"
+          height="120"
+        ></object>
+      </div>
+      <div class="svg-container">
+        <object
+          data="assets/svg/mothra.svg"
+          type="image/svg+xml"
+          width="120"
+          height="120"
+        ></object>
+      </div>
+      <div class="svg-container">
+        <object
+          data="assets/svg/ghidorah.svg"
+          type="image/svg+xml"
+          width="120"
+          height="120"
+        ></object>
+      </div>
+      <div class="svg-container">
+        <object
+          data="assets/svg/rodan.svg"
+          type="image/svg+xml"
+          width="120"
+          height="120"
+        ></object>
+      </div>
+      <div class="svg-container">
+        <object
+          data="assets/svg/mecha.svg"
+          type="image/svg+xml"
+          width="120"
+          height="120"
+        ></object>
+      </div>
+    </div>
+
+    <h2>Fetch Test</h2>
+    <div id="fetch-test">
+      <p>Testing fetch API loading of SVGs...</p>
+    </div>
+
+    <script>
+      // Test loading SVGs with fetch
+      const svgFiles = [
+        "assets/svg/godzilla.svg",
+        "assets/svg/kong.svg",
+        "assets/svg/mothra.svg",
+        "assets/svg/ghidorah.svg",
+        "assets/svg/rodan.svg",
+        "assets/svg/mecha.svg",
+      ];
+
+      const fetchTestContainer = document.getElementById("fetch-test");
+
+      svgFiles.forEach((file) => {
+        const container = document.createElement("div");
+        container.className = "svg-container";
+        fetchTestContainer.appendChild(container);
+
+        fetch(file)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+          })
+          .then((svgContent) => {
+            container.innerHTML = svgContent;
+            console.log(`Successfully loaded: ${file}`);
+          })
+          .catch((error) => {
+            console.error(`Error loading ${file}:`, error);
+            container.innerHTML = `<svg width="120" height="120" viewBox="0 0 200 200">
+            <rect width="200" height="200" fill="#333" rx="10" ry="10"/>
+            <circle cx="100" cy="100" r="50" fill="#666"/>
+            <text x="100" y="90" text-anchor="middle" fill="white" font-size="16">Error</text>
+            <text x="100" y="110" text-anchor="middle" fill="white" font-size="10">${file}</text>
+          </svg>`;
+          });
+      });
+    </script>
+  </body>
+</html>

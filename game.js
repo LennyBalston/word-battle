@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     player1Selector.className = "avatar-selector";
     player1Selector.innerHTML = `
       <h3>Player 1 Avatar</h3>
+      <div class="avatar-preview" id="player1-avatar-preview"></div>
       <select id="player1-avatar-select">
         ${availableAvatars
           .map(
@@ -92,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     player2Selector.className = "avatar-selector";
     player2Selector.innerHTML = `
       <h3>Player 2 Avatar</h3>
+      <div class="avatar-preview" id="player2-avatar-preview"></div>
       <select id="player2-avatar-select">
         ${availableAvatars
           .map(
@@ -110,12 +112,27 @@ document.addEventListener("DOMContentLoaded", () => {
     gameContainer.insertBefore(player1Selector, gameControls);
     gameContainer.insertBefore(player2Selector, gameControls);
 
+    // Load initial avatar previews
+    loadSVG(
+      `assets/svg/${player1Avatar.file}`,
+      document.getElementById("player1-avatar-preview")
+    );
+    loadSVG(
+      `assets/svg/${player2Avatar.file}`,
+      document.getElementById("player2-avatar-preview")
+    );
+
     // Add event listeners for avatar selection
     document
       .getElementById("player1-avatar-select")
       .addEventListener("change", (e) => {
         player1Avatar = availableAvatars[parseInt(e.target.value)];
         setPlayerAvatars();
+        // Update preview
+        loadSVG(
+          `assets/svg/${player1Avatar.file}`,
+          document.getElementById("player1-avatar-preview")
+        );
         updatePlayerNames();
         updatePlayerTurn();
       });
@@ -125,6 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .addEventListener("change", (e) => {
         player2Avatar = availableAvatars[parseInt(e.target.value)];
         setPlayerAvatars();
+        // Update preview
+        loadSVG(
+          `assets/svg/${player2Avatar.file}`,
+          document.getElementById("player2-avatar-preview")
+        );
         updatePlayerNames();
         updatePlayerTurn();
       });
@@ -138,6 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update player names
     updatePlayerNames();
+
+    // Update player background colors based on avatar
+    updatePlayerColors();
   }
 
   // Update player names
@@ -146,22 +171,60 @@ document.addEventListener("DOMContentLoaded", () => {
     player2Name.textContent = player2Avatar.name;
   }
 
+  // Update player background colors based on avatar
+  function updatePlayerColors() {
+    // Define color map for each avatar
+    const avatarColors = {
+      Godzilla: "rgba(15, 87, 56, 0.7)", // Green
+      "King Kong": "rgba(93, 64, 55, 0.7)", // Brown
+      Mothra: "rgba(156, 39, 176, 0.7)", // Purple
+      Ghidorah: "rgba(255, 193, 7, 0.7)", // Gold
+      Rodan: "rgba(244, 67, 54, 0.7)", // Red
+      Mecha: "rgba(96, 125, 139, 0.7)", // Blue-gray
+    };
+
+    // Set background colors
+    player1Element.style.backgroundColor = avatarColors[player1Avatar.name];
+    player2Element.style.backgroundColor = avatarColors[player2Avatar.name];
+  }
+
   // Load SVG from file
   function loadSVG(filePath, container) {
-    fetch(filePath)
-      .then((response) => response.text())
-      .then((svgContent) => {
-        container.innerHTML = svgContent;
-      })
-      .catch((error) => {
-        console.error(`Error loading SVG from ${filePath}:`, error);
-        // Fallback to a simple colored circle if SVG fails to load
-        container.innerHTML = `<svg width="120" height="120" viewBox="0 0 200 200">
-          <rect width="200" height="200" fill="#333" rx="10" ry="10"/>
-          <circle cx="100" cy="100" r="50" fill="#666"/>
-          <text x="100" y="110" text-anchor="middle" fill="white" font-size="20">Error</text>
-        </svg>`;
-      });
+    console.log(`Attempting to load SVG from: ${filePath}`);
+
+    // Create an img element approach
+    const img = document.createElement("img");
+    img.src = filePath;
+    img.alt = filePath.split("/").pop().replace(".svg", "");
+    img.width = 120;
+    img.height = 120;
+
+    // Clear the container and add the image
+    container.innerHTML = "";
+    container.appendChild(img);
+
+    // Add error handling
+    img.onerror = function () {
+      console.error(`Error loading SVG from ${filePath}`);
+
+      // Show error details in the container
+      container.innerHTML = `<svg width="120" height="120" viewBox="0 0 200 200">
+        <rect width="200" height="200" fill="#333" rx="10" ry="10"/>
+        <circle cx="100" cy="100" r="50" fill="#666"/>
+        <text x="100" y="90" text-anchor="middle" fill="white" font-size="16">Error</text>
+        <text x="100" y="110" text-anchor="middle" fill="white" font-size="10">${filePath}</text>
+      </svg>`;
+
+      // Add error message to battle log
+      addToBattleLog(
+        `Failed to load avatar: ${filePath.split("/").pop()}`,
+        "error"
+      );
+    };
+
+    img.onload = function () {
+      console.log(`Successfully loaded SVG from: ${filePath}`);
+    };
   }
 
   // Handle attack
@@ -285,9 +348,22 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Define avatar-specific CSS classes for styling
+    const avatarClasses = {
+      Godzilla: "godzilla-attack",
+      "King Kong": "kong-attack",
+      Mothra: "mothra-attack",
+      Ghidorah: "ghidorah-attack",
+      Rodan: "rodan-attack",
+      Mecha: "mecha-attack",
+    };
+
+    // Use avatar-specific class if available, otherwise fall back to player1/2-attack
+    const cssClass = avatarClasses[playerName] || `player${player}-attack`;
+
     addToBattleLog(
       `${playerName} attacks with "${word}" and deals ${damage} damage to ${opponentName}!`,
-      `player${player}-attack`
+      cssClass
     );
   }
 
@@ -423,6 +499,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update UI
     updateHealthBars();
     updatePlayerTurn();
+    updatePlayerColors(); // Ensure colors are reset properly
 
     // Enable attack controls
     attackWord.disabled = false;
